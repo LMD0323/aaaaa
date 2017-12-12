@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.how2java.mapper.ArticleMapper">
+    <resultMap id="articleInfoResultMap" type="com.how2java.pojo.Article">
+        <id column="Article_id" property="articleid"></id>
+        <result column="Article_author" property="articleauthor"></result>
+        <result column="Article_title" property="articletitle"></result>
+        <result column="Article_context" property="articlecontext"></result>
+        <result column="Article_date" property="articledate"></result>
+        <result column="discount" property="discount"></result>
+         <association property="articlediscuss" javaType="com.how2java.pojo.Discuss">
+             <id column="Discuss_id" property="discussid"></id>
+             <result column="Disarticle_id" property="disarticleid"></result>
+             <result column="Discuss_author" property="discussauthor"></result>
+             <result column="Discuss_mes" property="discussmes"></result>
+             <result column="Discuss_date" property="discussdate"></result>
+         </association>
+    </resultMap>
+    <select id="articlelist" resultMap="articleInfoResultMap">
+      select *,COUNT(Disarticle_id) discount from
+      (select * from article A ,discuss B where A.Article_id=B.Disarticle_id ORDER BY B.Discuss_date DESC) C
+       GROUP BY C.Article_id
+     </select>
+    <select id="articlelistno" resultMap="articleInfoResultMap">
+        select * from article where Article_id not in
+        (select C.Disarticle_id from
+        (select * from discuss B ORDER BY B.Discuss_date DESC) C
+        GROUP BY C.Disarticle_id) ORDER BY Article_date DESC
+    </select>
+    <select id="searcharticle" parameterType="int" resultMap="articleInfoResultMap">
+        select * from article where Article_id=#{articleid}
+    </select>
+</mapper>

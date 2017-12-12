@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.how2java.mapper.DiscussMapper">
+    <resultMap id="discussInfoResultMap" type="com.how2java.pojo.Discuss">
+            <id column="Discuss_id" property="discussid"></id>
+            <result column="Disarticle_id" property="disarticleid"></result>
+            <result column="Discuss_author" property="discussauthor"></result>
+            <result column="Discuss_mes" property="discussmes"></result>
+            <result column="Discuss_date" property="discussdate"></result>
+    </resultMap>
+    <select id="discusslist" parameterType="int" resultMap="discussInfoResultMap">
+        select * from discuss where Disarticle_id=#{disarticleid}
+    </select>
+</mapper>

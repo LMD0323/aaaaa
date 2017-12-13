@@ -15,7 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 @Controller
-@RequestMapping("")
+
 public class ArticleController {
     @Autowired
     private ArticleService articleService;
@@ -48,4 +48,31 @@ public class ArticleController {
         mav.setViewName("disarticle");
         return mav;
         }
+
+    @RequestMapping("toupdatearticle")
+    public ModelAndView goMyArticle(int articleid){
+        ModelAndView mav = new ModelAndView();
+        Article article1 = articleService.searcharticle(articleid);
+        mav.addObject("article1",article1);
+        mav.setViewName("updatearticle");
+        return mav;
+    }
+    /**
+     * 前往个人页面
+     * @return
+     */
+    @RequestMapping("gomyarticle")
+    public ModelAndView toUpdateArticle(String articleauthor){
+        ModelAndView mav = new ModelAndView();
+        List<Article> articlelist = articleService.searcharticlebyname(articleauthor);
+        mav.addObject("articlelist",articlelist);
+        mav.setViewName("myarticle");
+        return mav;
+    }
+    @RequestMapping("deletearticle")
+    public String deleteArticle(int articleid,String articleauthor){
+        int count1 = articleService.deletediscuss(articleid);
+        int count2 = articleService.deletearticle(articleid);
+        return "forward:gomyarticle?articleauthor=articleauthor";
+    }
         }

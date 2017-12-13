@@ -17,6 +17,10 @@
 <div style="color: aliceblue;margin-left: 180px;margin-top: 50px;">
     <h1>文章列表</h1>
 </div>
+<div style="color: aliceblue;margin-left: 1000px;margin-top: -40px;">
+    <sapn><a href="login.jsp">登录</a></sapn>
+    <span><a href="WEB-INF/jsp/regist.jsp">注册</a></span>
+</div>
 <div style="margin-top: 10px;">
     <hr>
 </div>

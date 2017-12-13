@@ -33,4 +33,13 @@
     <select id="searcharticle" parameterType="int" resultMap="articleInfoResultMap">
         select * from article where Article_id=#{articleid}
     </select>
+    <select id="searcharticlebyname" parameterType="String" resultMap="articleInfoResultMap">
+        select * from article where Article_author=#{articleauthor}
+    </select>
+    <delete id="deletediscuss" parameterType="int">
+        delete from discuss where discuss.Disarticle_id=#{disarticleid}
+    </delete>
+    <delete id="deletearticle" parameterType="int">
+     delete from article where article.Article_id=#{articleid}
+    </delete>
 </mapper>

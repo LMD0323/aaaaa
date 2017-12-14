@@ -14,4 +14,7 @@
     <select id="discusslist" parameterType="int" resultMap="discussInfoResultMap">
         select * from discuss where Disarticle_id=#{disarticleid}
     </select>
+    <insert id="insertdiscuss">
+        insert INTO discuss(Disarticle_id,Discuss_author,Discuss_mes,Discuss_date) values(#{disarticleid},#{discussauthor},#{discussmes},NOW())
+    </insert>
 </mapper>

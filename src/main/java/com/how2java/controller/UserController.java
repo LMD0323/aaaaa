@@ -1,5 +1,7 @@
 package com.how2java.controller;
 
+import com.how2java.pojo.Permission;
+import com.how2java.pojo.Role;
 import com.how2java.pojo.User;
 import com.how2java.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 @RequestMapping("")
@@ -43,11 +46,9 @@ public class UserController {
      * @return
      */
     @RequestMapping("tooff")
-    public ModelAndView offline(HttpSession session){
+    public String offline(HttpSession session){
         session.removeAttribute("user1");
-        ModelAndView mav = new ModelAndView();
-        mav.setViewName("listCategory");
-        return mav;
+        return "forward:listCategory";
     }
 
     /**
@@ -67,5 +68,17 @@ public class UserController {
         }
         //µÇÂ¼Ê§°Ü·µ»Øno
         return "no";
+    }
+    @RequestMapping("tomyuser")
+    public ModelAndView toMyUser(String username){
+        ModelAndView mav = new ModelAndView();
+        List<Permission> permissionList = userService.listpermisssion();
+        List<User> userList = userService.userlist(username);
+        List<Role> roleList = userService.listrole();
+        mav.addObject("permissionList",permissionList);
+        mav.addObject("userList",userList);
+        mav.addObject("roleList",roleList);
+        mav.setViewName("myuser");
+        return mav;
     }
 }

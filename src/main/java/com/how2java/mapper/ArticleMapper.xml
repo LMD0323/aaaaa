@@ -21,8 +21,8 @@
     </resultMap>
     <select id="articlelist" resultMap="articleInfoResultMap">
       select *,COUNT(Disarticle_id) discount from
-      (select * from article A ,discuss B where A.Article_id=B.Disarticle_id ORDER BY B.Discuss_date DESC) C
-       GROUP BY C.Article_id
+(select * from article A ,discuss B where A.Article_id=B.Disarticle_id ) C
+ GROUP BY C.Article_id ORDER BY Discuss_date DESC
      </select>
     <select id="articlelistno" resultMap="articleInfoResultMap">
         select * from article where Article_id not in
@@ -36,10 +36,16 @@
     <select id="searcharticlebyname" parameterType="String" resultMap="articleInfoResultMap">
         select * from article where Article_author=#{articleauthor}
     </select>
+    <select id="searcharticleuser" parameterType="String" resultMap="articleInfoResultMap">
+        select * from article where NOT (Article_author=#{articleauthor})
+    </select>
     <delete id="deletediscuss" parameterType="int">
         delete from discuss where discuss.Disarticle_id=#{disarticleid}
     </delete>
     <delete id="deletearticle" parameterType="int">
      delete from article where article.Article_id=#{articleid}
     </delete>
+    <update id="updatearticle">
+        update article set Article_title=#{articletitle},Article_context=#{articlecontext} where Article_id=#{articleid}
+    </update>
 </mapper>

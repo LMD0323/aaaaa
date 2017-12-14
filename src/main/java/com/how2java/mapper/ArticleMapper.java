@@ -10,6 +10,7 @@ public interface ArticleMapper {
     public List<Article> articlelistno();//查询没有评论的文章列表
     public Article searcharticle(int articleid);//根据编号查询文章详情
     public List<Article> searcharticlebyname(String articleauthor);//根据作者查询文章
+    public List<Article> searcharticleuser(String articleauthor);//查询用户文章
     /*
     删除文章
     1.先删除评论
@@ -17,4 +18,6 @@ public interface ArticleMapper {
      */
     public int deletediscuss(int articleid);
     public int deletearticle(int articleid);
+    //编辑文章
+    public int updatearticle(Article article);
 }

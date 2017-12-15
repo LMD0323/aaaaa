@@ -1,6 +1,6 @@
 package com.how2java.controller;
 
-import com.how2java.pojo.Discuss;
+import com.how2java.model.Discuss;
 import com.how2java.service.DiscussService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

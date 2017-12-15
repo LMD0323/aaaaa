@@ -1,7 +1,6 @@
 package com.how2java.mapper;
 
-import com.how2java.pojo.Article;
-import com.how2java.pojo.Discuss;
+import com.how2java.model.Article;
 
 import java.util.List;
 
@@ -20,4 +19,6 @@ public interface ArticleMapper {
     public int deletearticle(int articleid);
     //编辑文章
     public int updatearticle(Article article);
+    //增加文章
+    public int addarticles(Article article);
 }

@@ -1,8 +1,7 @@
 package com.how2java.service.impl;
 
 import com.how2java.mapper.ArticleMapper;
-import com.how2java.pojo.Article;
-import com.how2java.pojo.Discuss;
+import com.how2java.model.Article;
 import com.how2java.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,6 +44,10 @@ public class ArticleServiceImpl implements ArticleService {
     public int updatearticle(Article article){
         int count3 = articleMapper.updatearticle(article);
         return count3;
+    }
+    public int addarticles(Article article){
+        int count4 = articleMapper.addarticles(article);
+        return count4;
     }
 
 }

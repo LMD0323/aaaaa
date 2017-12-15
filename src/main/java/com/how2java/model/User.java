@@ -1,10 +1,10 @@
-package com.how2java.pojo;
+package com.how2java.model;
 
 public class User {
     private int userid;
     private String username;
     private String userphone;
-    private String uerpwd;
+    private String userpwd;
     private String userrole;
     private Role userrolename;
 
@@ -32,12 +32,12 @@ public class User {
         this.userphone = userphone;
     }
 
-    public String getUerpwd() {
-        return uerpwd;
+    public String getUserpwd() {
+        return userpwd;
     }
 
-    public void setUerpwd(String uerpwd) {
-        this.uerpwd = uerpwd;
+    public void setUserpwd(String userpwd) {
+        this.userpwd = userpwd;
     }
 
     public String getUserrole() {

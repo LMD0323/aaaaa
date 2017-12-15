@@ -1,4 +1,4 @@
-package com.how2java.pojo;
+package com.how2java.model;
 
 public class Permission {
     private String permissionid;//È¨ÏÞ±àºÅ

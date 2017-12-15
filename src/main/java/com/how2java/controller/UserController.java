@@ -1,8 +1,8 @@
 package com.how2java.controller;
 
-import com.how2java.pojo.Permission;
-import com.how2java.pojo.Role;
-import com.how2java.pojo.User;
+import com.how2java.model.Permission;
+import com.how2java.model.Role;
+import com.how2java.model.User;
 import com.how2java.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -70,15 +70,34 @@ public class UserController {
         return "no";
     }
     @RequestMapping("tomyuser")
-    public ModelAndView toMyUser(String username){
+    public ModelAndView toMyUser(HttpSession session){
         ModelAndView mav = new ModelAndView();
+        User user = (User) session.getAttribute("user1");
         List<Permission> permissionList = userService.listpermisssion();
-        List<User> userList = userService.userlist(username);
+        List<User> userList = userService.userlist(user.getUsername());
         List<Role> roleList = userService.listrole();
         mav.addObject("permissionList",permissionList);
         mav.addObject("userList",userList);
         mav.addObject("roleList",roleList);
         mav.setViewName("myuser");
         return mav;
+    }
+    @RequestMapping("updaterole")
+    @ResponseBody
+    public String upDateUserRole(User user){
+        int count = userService.updateuserrole(user);
+        if(count>0){
+            return "updateroleok";
+        }
+        return "updateroleno";
+    }
+    @RequestMapping("adduser")
+    @ResponseBody
+    public String addUser(User user){
+        int count = userService.adduser(user);
+        if(count>0){
+           return "adduserok";
+        }
+        return "adduserno";
     }
 }

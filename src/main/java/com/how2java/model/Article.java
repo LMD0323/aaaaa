@@ -1,4 +1,4 @@
-package com.how2java.pojo;
+package com.how2java.model;
 
 public class Article {
     private int articleid;//ндуб╠Ю╨е

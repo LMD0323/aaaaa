@@ -20,4 +20,13 @@ public class DiscussController {
         }
         return "insno";
     }
+    @RequestMapping("deletediscuss")
+    @ResponseBody
+    public String deleteDiscuss(int discussid){
+        int count = discussService.deletediscuss(discussid);
+        if(count>0){
+           return "deledisok";
+        }
+        return "deledisno";
+    }
 }

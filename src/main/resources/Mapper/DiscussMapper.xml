@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.how2java.mapper.DiscussMapper">
-    <resultMap id="discussInfoResultMap" type="com.how2java.pojo.Discuss">
+    <resultMap id="discussInfoResultMap" type="com.how2java.model.Discuss">
             <id column="Discuss_id" property="discussid"></id>
             <result column="Disarticle_id" property="disarticleid"></result>
             <result column="Discuss_author" property="discussauthor"></result>
@@ -17,4 +17,7 @@
     <insert id="insertdiscuss">
         insert INTO discuss(Disarticle_id,Discuss_author,Discuss_mes,Discuss_date) values(#{disarticleid},#{discussauthor},#{discussmes},NOW())
     </insert>
+    <delete id="deletediscuss">
+        DELETE from discuss where Discuss_id=#{discussid}
+    </delete>
 </mapper>

@@ -4,14 +4,14 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.how2java.mapper.ArticleMapper">
-    <resultMap id="articleInfoResultMap" type="com.how2java.pojo.Article">
+    <resultMap id="articleInfoResultMap" type="com.how2java.model.Article">
         <id column="Article_id" property="articleid"></id>
         <result column="Article_author" property="articleauthor"></result>
         <result column="Article_title" property="articletitle"></result>
         <result column="Article_context" property="articlecontext"></result>
         <result column="Article_date" property="articledate"></result>
         <result column="discount" property="discount"></result>
-         <association property="articlediscuss" javaType="com.how2java.pojo.Discuss">
+         <association property="articlediscuss" javaType="com.how2java.model.Discuss">
              <id column="Discuss_id" property="discussid"></id>
              <result column="Disarticle_id" property="disarticleid"></result>
              <result column="Discuss_author" property="discussauthor"></result>
@@ -48,4 +48,8 @@
     <update id="updatearticle">
         update article set Article_title=#{articletitle},Article_context=#{articlecontext} where Article_id=#{articleid}
     </update>
+    <insert id="addarticles" >
+     insert INTO article(Article_author,Article_title,Article_context,Article_date)
+     values(#{articleauthor},#{articletitle},#{articlecontext},NOW())
+    </insert>
 </mapper>

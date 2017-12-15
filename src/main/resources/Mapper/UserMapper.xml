@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.how2java.mapper.UserMapper">
+    <resultMap id="userInfoResultMap" type="com.how2java.model.User">
+        <id column="User_id" property="userid"></id>
+        <result column="User_name" property="username"></result>
+        <result column="User_phone" property="userphone"></result>
+        <result column="User_pwd" property="userpwd"></result>
+        <result column="User_role" property="userrole"></result>
+        <association property="userrolename" javaType="com.how2java.model.Role">
+            <id column="RoleID" property="roleid"></id>
+            <result column="RoleName" property="rolename"></result>
+        </association>
+    </resultMap>
+    <resultMap id="roleNameResultMap" type="com.how2java.model.Role">
+        <id column="RoleID" property="roleid"></id>
+        <result column="RoleName" property="rolename"></result>
+    </resultMap>
+    <select id="listrole" resultMap="roleNameResultMap">
+        select * from role
+    </select>
+    <select id="login"  resultMap="userInfoResultMap">
+        select * from user where User_name=#{username} and User_pwd=#{userpwd}
+    </select>
+    <select id="userlist" resultMap="userInfoResultMap">
+       select * from (select * from user,role where user.User_role = role.RoleID) A
+       where NOT (User_name=#{username})
+    </select>
+    <update id="updateuserrole">
+     UPDATE user set User_role=#{userrole} where User_name =#{username}
+    </update>
+    <insert id="adduser">
+    INSERT into user(User_name,User_phone,User_pwd,User_role) values(#{username},#{userphone},#{userpwd},'02')
+    </insert>
+    <resultMap id="userpermission" type="com.how2java.model.Permission">
+        <id column="Permission" property="permissionid"></id>
+        <result column="PermissionName" property="permissionname"></result>
+    </resultMap>
+    <select id="listpermisssion" resultMap="userpermission">
+        select * from permission
+    </select>
+
+</mapper>
